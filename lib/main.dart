@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_demo/profile_page.dart';
+import 'package:navigation_demo/settings_page.dart';
+
+import 'home_page.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      home: LoginPage(),
-      theme: ThemeData.dark(),
+     theme: ThemeData.dark(),
+      // Start the app with the "/" named route. In this case, the app starts
+// on the FirstScreen widget.
+      initialRoute: '/',
+      routes: {
+// When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => LoginPage(),
+// When navigating to the "/second" route, build the SecondScreen widget.
+        '/homepage': (context) => HomePage(),
+        '/settingspage': (context)=> SettingsPage(),
+        '/profilepage': (context)=> ProfilePage(),
+      },
     )
   );
 }
@@ -18,14 +32,17 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Navigation')),
+      appBar: AppBar(title: Text('Login'),centerTitle: true,),
       body: Center(
         child: RaisedButton(
+          color: Colors.blue,
           child: Text('Go to Home'),
-          onPressed: (){},
+          onPressed: (){
+           // Navigator.push(context,MaterialPageRoute(builder: (context)=> HomePage()));
+            Navigator.pushNamed(context, '/homepage');
+          },
         ),
       ),
     );
   }
 }
-
